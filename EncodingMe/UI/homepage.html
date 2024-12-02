@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据库管理平台</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column; /* Change to column to stack header and content */
+            margin: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh; /* Ensure the body takes the full viewport height */
+        }
+        .header {
+            display: flex;
+            justify-content: center; /* Center the header content horizontally */
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #0275d8;
+            color: white;
+            position: relative; /* Allow absolute positioning of user-menu */
+        }
+        .header .title {
+            font-size: 24px;
+            text-align: center;
+            flex-grow: 1; /* Allow title to take available space */
+        }
+        .header .user-menu {
+            position: absolute;
+            right: 20px; /* Position user-menu to the right */
+            display: inline-block;
+        }
+        .header .user-menu button {
+            background-color: #0275d8;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            padding: 10px 20px; /* Increase button size */
+            height: 100%; /* Match the height of the header */
+        }
+        .header .user-menu button:hover {
+            background-color: #025aa5; /* Change color on hover */
+        }
+        .header .user-menu img {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            border-radius: 50%;
+        }
+        .header .user-menu-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .header .user-menu-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block; /* Display menu items vertically */
+        }
+        .header .user-menu-content a:hover {
+            background-color: #ddd;
+        }
+        .header .user-menu:hover .user-menu-content {
+            display: block;
+        }
+        .main-content {
+            display: flex;
+            flex: 1; /* Allow main content to take remaining space */
+        }
+        .sidebar {
+            width: 20%;
+            background-color: #e0f7fa; /* Light blue background */
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            border-right: 1px solid #ddd; /* Add border to blend with main content */
+        }
+        .sidebar a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            margin-bottom: 10px;
+            border-radius: 0; /* Remove border-radius for a flat look */
+        }
+        .sidebar a:hover {
+            background-color: #ddd;
+        }
+        .sidebar a.active {
+            background-color: #0275d8;
+            color: white;
+            border-right: none; /* Remove right border to blend with main content */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="title">数据库管理平台</div>
+        <div class="user-menu">
+            <button>
+                <img src="user-icon.png" alt="User Icon">用户
+            </button>
+            <div class="user-menu-content">
+                <a href="./personpage.html">个人信息</a>
+                <a href="./login.html">退出</a>
+            </div>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="sidebar">
+            <a href="#" class="active">数据库信息总览</a>
+            <a href="./personal">个人数据库管理</a>
+            <a href="#">密钥管理</a>
+        </div>
+        <!-- Main content goes here -->
+    </div>
+</body>
+</html>

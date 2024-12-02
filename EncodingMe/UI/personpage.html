@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息</title>
+    <style>
+        body {
+            background-image: url('./bgPic/login_bg1.jpg'); /* 设置背景图片 */
+            background-size: cover; /* 背景图片覆盖整个元素 */
+            background-position: center; /* 背景图片居中 */
+            display: flex; /* 使用弹性布局 */
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+            height: 100vh; /* 设置高度为视口高度 */
+            margin: 0; /* 移除默认外边距 */
+            font-family: Arial, sans-serif; /* 设置字体 */
+        }
+        .person-container {
+            background-color: white; /* 设置背景颜色为白色 */
+            padding: 30px; /* 设置内边距 */
+            border-radius: 8px; /* 设置圆角 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+            width: 500px; /* 设置宽度 */
+            text-align: center; /* 文本居中 */
+            position: relative; /* 设置相对定位 */
+        }
+        .person-container h1 {
+            font-size: 24px; /* 设置字体大小 */
+            color: #333; /* 设置字体颜色 */
+            margin: 0; /* 移除默认外边距 */
+        }
+        .input-container {
+            display: flex; /* 使用弹性布局 */
+            align-items: center; /* 垂直居中对齐 */
+            margin: 12px 0; /* 设置上下外边距 */
+            justify-content: space-between; /* 两端对齐 */
+        }
+        .input-container label {
+            flex: 0 0 100px; /* 设置固定宽度 */
+            text-align: right; /* 文本右对齐 */
+            margin-right: 5px; /* 设置右侧外边距 */
+            font-size: 13px; /* 设置字体大小 */
+        }
+        .input-container span, .input-container input, .input-container select {
+            flex: 1; /* 占据剩余空间 */
+            padding: 8px; /* 设置内边距 */
+            border: 1px solid #ddd; /* 设置边框 */
+            border-radius: 4px; /* 设置圆角 */
+            font-size: 14px; /* 设置字体大小 */
+            margin-right: 5px; /* 设置右侧外边距 */
+            display: none; /* 默认隐藏 */
+        }
+        .input-container img {
+            cursor: pointer; /* 设置鼠标样式为手型 */
+            width: 20px; /* 设置图标宽度 */
+            height: 20px; /* 设置图标高度 */
+        }
+        .button-container {
+            display: flex; /* 使用弹性布局 */
+            justify-content: center; /* 水平居中 */
+            margin-top: 20px; /* 设置上外边距 */
+            gap: 160px; /* 添加这行来调整按钮之间的间距 */
+        }
+        .person-container button {
+            padding: 10px 20px; /* 设置内边距 */
+            border: none; /* 移除边框 */
+            border-radius: 4px; /* 设置圆角 */
+            color: white; /* 设置字体颜色 */
+            font-size: 16px; /* 设置字体大小 */
+            cursor: pointer; /* 设置鼠标样式为手型 */
+            transition: background-color 0.3s; /* 添加背景色过渡效果 */
+        }
+        .person-container button[type="submit"] {
+            background-color: #28a745; /* 设置提交按钮背景色 */
+        }
+        .person-container button[type="submit"]:hover {
+            background-color: #218838; /* 设置提交按钮悬停时的背景色 */
+        }
+    </style>
+</head>
+<body>
+    <div class="person-container">
+        <h1>个人信息</h1>
+        <form id="person-form" method="post" onsubmit="handlePersonUpdate(event)">
+            <!-- 头像 -->
+            <div class="input-container">
+                <label>头像：</label>
+                <img src="user-avatar.png" alt="User Avatar" id="head_icon">
+                <input type="file" id="upload_avatar" accept=".jpg, .png" style="display: none;" onchange="uploadAvatar()">
+                <button type="button" onclick="document.getElementById('upload_avatar').click()">上传</button>
+            </div>
+            <!-- 姓名 -->
+            <div class="input-container">
+                <label>姓名：</label>
+                <span id="name_display">张三</span>
+                <input type="text" id="name" value="张三">
+                <img src="edit-icon.png" alt="Edit" onclick="editField('name')">
+            </div>
+            <!-- 工号 -->
+            <div class="input-container">
+                <label>工号：</label>
+                <span id="employee_id_display">123456</span>
+                <input type="text" id="employee_id" value="123456" readonly>
+            </div>
+            <!-- 用户名 -->
+            <div class="input-container">
+                <label>用户名：</label>
+                <span id="username_display">zhangsan</span>
+                <input type="text" id="username" value="zhangsan">
+                <img src="edit-icon.png" alt="Edit" onclick="editField('username')">
+            </div>
+            <!-- 部门名称 -->
+            <div class="input-container">
+                <label>部门名称：</label>
+                <span id="department_display">技术部</span>
+                <input type="text" id="department" value="技术部">
+                <img src="edit-icon.png" alt="Edit" onclick="editField('department')">
+            </div>
+            <!-- 手机号码 -->
+            <div class="input-container">
+                <label>手机号码：</label>
+                <span id="phone_display">13800138000</span>
+                <input type="text" id="phone" value="13800138000">
+                <img src="edit-icon.png" alt="Edit" onclick="editField('phone')">
+            </div>
+            <div class="button-container">
+                <button type="submit">提交</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function editField(field) {
+            const displaySpan = document.getElementById(field + '_display');
+            const input = document.getElementById(field);
+            displaySpan.style.display = 'none';
+            input.style.display = 'block';
+            input.focus();
+        }
+
+        function uploadAvatar() {
+            const fileInput = document.getElementById('upload_avatar');
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('head_icon').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handlePersonUpdate(event) {
+            event.preventDefault();
+
+            // 获取用户姓名
+            const name = document.getElementById('name').value;
+            // 获取用户名
+            const username = document.getElementById('username').value;
+            // 获取部门名称
+            const department = document.getElementById('department').value;
+            // 获取手机号码
+            const phone = document.getElementById('phone').value;
+
+            // 检查修改的内容不应为空
+            if (!name || !username || !department || !phone) {
+                alert('所有字段均为必填项');
+                return;
+            }
+
+            // 发送更新请求到服务器
+            fetch('/update_person', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, username, department, phone })
+            })
+            .then(response => {
+                if (response.status === 200) {
+                    alert('更新成功');
+                    window.location.reload();
+                } else {
+                    alert('更新失败');
+                }
+            })
+            .catch(error => {
+                console.error('更新请求失败:', error);
+            });
+        }
+    </script>
+</body>
+</html>
