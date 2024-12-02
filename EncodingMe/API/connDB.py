@@ -47,19 +47,4 @@ def update_data(connection, table, updates, condition):
     except Exception as error:
         print(f"Error updating data: {error}")
 
-# Example usage:
-if __name__ == "__main__":
-    conn = connect_to_db()
-    if conn:
-        # Insert data example
-        insert_data(conn, 'your_table', {'column1': 'value1', 'column2': 'value2'})
-        
-        # Delete data example
-        delete_data(conn, 'your_table', "column1 = 'value1'")
-        
-        # Update data example
-        update_data(conn, 'your_table', {'column1': 'new_value'}, "column2 = 'value2'")
-        
-        conn.close()
-
 

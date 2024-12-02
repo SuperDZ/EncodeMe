@@ -14,6 +14,10 @@ def index():
 def login():
     return render_template('login.html')
 
+@app.route('/homepage.html')
+def homepage():
+    return render_template('homepage.html')
+
 @app.route('/regist.html')
 def register():
     return render_template('regist.html')
