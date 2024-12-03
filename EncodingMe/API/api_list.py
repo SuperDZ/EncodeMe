@@ -1,8 +1,10 @@
+import sys
+sys.path.append(".")
 from flask import Flask, request, jsonify
 import psycopg2
 from connDB import connect_to_db
-from EncodingMe.UserManagement.login import _login
-from EncodingMe.UserManagement.regist import _register
+from UserManagement.login import _login
+from UserManagement.regist import _register
 
 app = Flask(__name__)
 
@@ -26,14 +28,14 @@ def login():
 @app.route('/register', methods=['POST'])
 def regist():
     data = request.get_json()
-    usr_id = data['userid']
+    usr_id = data['usr_id']
     usr_relname = data['relname']   #relname是真实姓名
     usr_name = data['username']     #username是用户名
     usr_password = data['password']
     usr_department = data['department']
     usr_phone = data['phone']
-    result = _register(usr_id, usr_relname, usr_name, usr_password, usr_department, usr_phone)
-    return jsonify({'result': result}), 200
+    result, status_code = _register(usr_id, usr_relname, usr_name, usr_password, usr_department, usr_phone)
+    return result, status_code
 
 # 信息修改接口
 @app.route('/users/<int:user_id>', methods=['PUT'])

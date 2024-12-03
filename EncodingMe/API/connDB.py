@@ -3,11 +3,11 @@ import psycopg2
 def connect_to_db():
     try:
         connection = psycopg2.connect(
-            user="postgres",
+            user="postgresql",
             password="",
             host="192.168.31.10",
             port="5432",
-            database="postgres"
+            database="postgresql"
         )
         return connection
     except Exception as error:

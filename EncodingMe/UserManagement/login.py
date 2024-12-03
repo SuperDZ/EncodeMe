@@ -1,7 +1,9 @@
 # FILEPATH: /cloudide/workspace/EncodeMe/EncodingMe/API/login_handler.py
+import sys
+sys.path.append(".")
 from flask import jsonify, request
 import psycopg2
-from EncodingMe.API.connDB import connect_to_db
+from API.connDB import connect_to_db
 # 登录接口
 def _login(username , password):
 
