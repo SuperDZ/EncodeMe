@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
 import psycopg2
 from connDB import connect_to_db
+from EncodingMe.UserManagement.login import _login
+from EncodingMe.UserManagement.regist import _register
 
 app = Flask(__name__)
 
@@ -14,12 +16,24 @@ class User:
 # 登录接口
 @app.route('/login', methods=['POST'])
 def login():
-    return login()
+    data = request.get_json()
+    username = data['username']
+    password = data['password']
+    result = _login(username, password)
+    return jsonify({'result': result}), 200
 
 # 注册接口
 @app.route('/register', methods=['POST'])
-def register():
-    pass
+def regist():
+    data = request.get_json()
+    usr_id = data['userid']
+    usr_relname = data['relname']   #relname是真实姓名
+    usr_name = data['username']     #username是用户名
+    usr_password = data['password']
+    usr_department = data['department']
+    usr_phone = data['phone']
+    result = _register(usr_id, usr_relname, usr_name, usr_password, usr_department, usr_phone)
+    return jsonify({'result': result}), 200
 
 # 信息修改接口
 @app.route('/users/<int:user_id>', methods=['PUT'])

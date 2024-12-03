@@ -167,9 +167,9 @@
             event.preventDefault();
 
             // 获取用户姓名
-            const name = document.getElementById('name').value;
+            const relname = document.getElementById('relname').value;
             // 获取用户工号
-            const employee_id = document.getElementById('employee_id').value;
+            const usr_id= document.getElementById('usr_id').value;
             // 获取用户名
             const username = document.getElementById('username').value;
             // 获取密码
@@ -180,8 +180,6 @@
             const department = document.getElementById('department').value;
             // 获取手机号码
             const phone = document.getElementById('phone').value;
-            // 获取验证码
-            const captcha = document.getElementById('captcha').value;
 
             // 检查密码和确认密码是否一致
             if (password !== confirm_password) {
@@ -200,7 +198,7 @@
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, employee_id, username, password, department, phone })
+                body: JSON.stringify({ relname, usr_id, username, password, department, phone })
             })
             .then(response => {
                 if (response.status === 200) {

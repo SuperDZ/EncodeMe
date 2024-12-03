@@ -10,31 +10,17 @@ app.static_folder = '../UI'
 def index():
     return redirect(url_for('login'))
 
-@app.route('/login.html')
+@app.route('/login_html.html')
 def login():
     return render_template('login.html')
 
-@app.route('/homepage.html')
+@app.route('/homepage_html.html')
 def homepage():
     return render_template('homepage.html')
 
-@app.route('/regist.html')
+@app.route('/regist_html.html')
 def register():
     return render_template('regist.html')
-
-@app.route('/login', methods=['POST'])
-def handle_login():
-    data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
-    # TODO: 处理登录逻辑
-    return '', 200
-
-@app.route('/regist', methods=['POST'])
-def handle_register():
-    data = request.get_json()
-    # TODO: 处理注册逻辑
-    return '', 200
 
 @app.route('/captcha')
 def captcha():
