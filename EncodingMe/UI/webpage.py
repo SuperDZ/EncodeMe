@@ -10,17 +10,17 @@ app.static_folder = '../UI'
 def index():
     return redirect(url_for('login'))
 
-@app.route('/login_html.html')
+@app.route('/login.html')
 def login():
-    return render_template('login.html')
+    return render_template('./login.html')
 
-@app.route('/homepage_html.html')
+@app.route('/homepage.html')
 def homepage():
-    return render_template('homepage.html')
+    return render_template('./homepage.html')
 
-@app.route('/regist_html.html')
+@app.route('/regist.html')
 def register():
-    return render_template('regist.html')
+    return render_template('./regist.html')
 
 @app.route('/captcha')
 def captcha():
@@ -32,4 +32,4 @@ def serve_background(filename):
     return send_from_directory('../UI/bgPic', filename)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port = 5001)
